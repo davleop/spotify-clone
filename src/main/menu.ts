@@ -198,14 +198,126 @@ export default class MenuBuilder {
         label: '&File',
         submenu: [
           {
-            label: '&Open',
-            accelerator: 'Ctrl+O',
+            label: 'New Playlist',
+            accelerator: 'Ctrl+N',
+            click: () => {
+              console.log('[MENU] New Playlist hit');
+            },
+          },
+          {
+            label: 'New Playlist Folder',
+            accelerator: 'Ctrl+Shift+N',
+            click: () => {
+              console.log('[MENU] New Playlist Folder hit');
+            },
+          },
+          {
+            label: 'Private Session',
+            click: () => {
+              console.log('[MENU] Private Session hit');
+            },
+          },
+          {
+            label: 'Offline Mode',
+            click: () => {
+              console.log('[MENU] Offline Mode hit');
+            },
+          },
+          {
+            label: 'Log Out',
+            accelerator: 'Ctrl+Shift+W',
+            click: () => {
+              console.log('[MENU] Log Out hit');
+            },
           },
           {
             label: '&Close',
             accelerator: 'Ctrl+W',
             click: () => {
               this.mainWindow.close();
+            },
+          },
+          {
+            label: '&Close',
+            accelerator: 'Ctrl+Shift+Q',
+            visible: false,
+            click: () => {
+              this.mainWindow.close();
+            },
+          },
+        ],
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          {
+            label: 'Undo',
+            accelerator: 'Ctrl+Z',
+            click: () => {
+              console.log('[MENU] Undo hit');
+            },
+          },
+          {
+            label: 'Redo',
+            accelerator: 'Ctrl+Y',
+            click: () => {
+              console.log('[MENU] Redo hit');
+            },
+          },
+          {
+            label: 'Cut',
+            accelerator: 'Ctrl+X',
+            click: () => {
+              console.log('[MENU] Cut hit');
+            },
+          },
+          {
+            label: 'Copy',
+            accelerator: 'Ctrl+C',
+            click: () => {
+              console.log('[MENU] Copy hit');
+            },
+          },
+          {
+            label: 'Paste',
+            accelerator: 'Ctrl+V',
+            click: () => {
+              console.log('[MENU] Paste hit');
+            },
+          },
+          {
+            label: 'Delete',
+            accelerator: 'Delete',
+            click: () => {
+              console.log('[MENU] Delete hit');
+            },
+          },
+          {
+            label: 'Select All',
+            accelerator: 'Ctrl+A',
+            click: () => {
+              console.log('[MENU] Select All hit');
+            },
+          },
+          {
+            label: 'Search',
+            accelerator: 'Ctrl+F',
+            click: () => {
+              console.log('[MENU] Search hit');
+            },
+          },
+          {
+            label: 'Filter',
+            accelerator: 'Ctrl+H',
+            click: () => {
+              console.log('[MENU] Filter hit');
+            },
+          },
+          {
+            label: 'Preferences',
+            accelerator: 'Ctrl+P',
+            click: () => {
+              console.log('[MENU] Preferences hit');
             },
           },
         ],
@@ -250,35 +362,108 @@ export default class MenuBuilder {
                     );
                   },
                 },
+                {
+                  label: 'Friend Activity',
+                  click: () => {
+                    console.log('[MENU] Friend Activity hit');
+                  },
+                },
               ],
+      },
+      {
+        label: 'Playback',
+        submenu: [
+          {
+            label: 'Play',
+            accelerator: 'Space',
+            click: () => {
+              console.log('[MENU] Play button hit');
+            },
+          },
+          {
+            label: 'Next',
+            accelerator: 'Ctrl+Right',
+            click: () => {
+              console.log('[MENU] Next button hit');
+            },
+          },
+          {
+            label: 'Previous',
+            accelerator: 'Ctrl+Left',
+            click: () => {
+              console.log('[MENU] Previous button hit');
+            },
+          },
+          {
+            label: 'Seek Forward',
+            accelerator: 'Shift+Right',
+            click: () => {
+              console.log('[MENU] Seek Forward button hit');
+            },
+          },
+          {
+            label: 'Seek Backward',
+            accelerator: 'Shift+Left',
+            click: () => {
+              console.log('[MENU] Seek Backward button hit');
+            },
+          },
+          {
+            label: 'Shuffle',
+            accelerator: 'Ctrl+S',
+            click: () => {
+              console.log('[MENU] Shuffle button hit');
+            },
+          },
+          {
+            label: 'Repeat',
+            accelerator: 'Ctrl+R',
+            click: () => {
+              console.log('[MENU] Repeat button hit');
+            },
+          },
+          {
+            label: 'Volume Up',
+            accelerator: 'Ctrl+Up',
+            click: () => {
+              console.log('[MENU] Volume Up button hit');
+            },
+          },
+          {
+            label: 'Volume Down',
+            accelerator: 'Ctrl+Down',
+            click: () => {
+              console.log('[MENU] Volume Down button hit');
+            },
+          },
+        ],
       },
       {
         label: 'Help',
         submenu: [
           {
-            label: 'Learn More',
+            label: 'Spotify Help',
             click() {
-              shell.openExternal('https://electronjs.org');
+              shell.openExternal('https://support.spotify.com/us');
             },
           },
           {
-            label: 'Documentation',
+            label: 'Spotify Community',
             click() {
-              shell.openExternal(
-                'https://github.com/electron/electron/tree/main/docs#readme'
-              );
+              shell.openExternal('https://community.spotify.com/');
             },
           },
           {
-            label: 'Community Discussions',
+            label: 'Your Account',
             click() {
-              shell.openExternal('https://www.electronjs.org/community');
+              shell.openExternal('https://www.spotify.com/us/account/overview');
             },
           },
           {
-            label: 'Search Issues',
+            label: 'About',
             click() {
-              shell.openExternal('https://github.com/electron/electron/issues');
+              // TODO(david): add popup window here
+              shell.openExternal('https://newsroom.spotify.com/company-info');
             },
           },
         ],
