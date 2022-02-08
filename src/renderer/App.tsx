@@ -6,7 +6,7 @@ import BottomBar from './bottombar';
 
 const Hello = () => {
   return (
-    <div>
+    <div className="">
       <MainNavBar />
       <BottomBar />
     </div>
