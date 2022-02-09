@@ -16,6 +16,7 @@
   font-size: 16px;
   color: #b3b3b3;
   display: block;
+  justify-content: center;
 }
 
 #nav a:hover {
@@ -25,7 +26,6 @@
 #nav #playlists a {
   font-size: 16px;
   color: #b3b3b3;
-  padding-top: 10px;
 }
 
 #nav #playlists a:hover {
@@ -38,6 +38,7 @@
   background-color: #b3b3b3;
   width: 80%;
   border: 1px solid;
+  margin: auto;
 }
 
 #nav #playlists #overlay_content {

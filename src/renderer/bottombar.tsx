@@ -8,9 +8,7 @@ class BottomBar extends PureComponent {
       <div id="botbar">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm">
-              <button>test</button>
-            </div>
+            <div className="col-sm"></div>
             <div className="col-sm">
               <div className="playpause">
                 <input type="checkbox" value="None" id="playpause" name="check" />
@@ -24,7 +22,7 @@ class BottomBar extends PureComponent {
             <div className="col-sm"></div>
             <div className="col-sm">
               <div className="timeline">
-                <input type="range" min="0" max="100" />
+                <input id="rangevalue" type="range" min="0" max="100" />
               </div>
             </div>
             <div className="col-sm"></div>
