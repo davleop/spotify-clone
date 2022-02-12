@@ -12,6 +12,10 @@ class BottomBar extends Component {
       volume: 100,
       shuffle_color: `#cacaca`,
       repeat_color: `#cacaca`,
+      lyrics_color: `#cacaca`,
+      queue_color: `#cacaca`,
+      devices_color: `#cacaca`,
+      fullscreen: false,
       current_repeat_class: `bi bi-arrow-repeat d-flex justify-content-center align-items-center repeat`,
     };
 

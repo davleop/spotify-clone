@@ -126,6 +126,9 @@
 .shuffle:hover {
   color: #fff;
 }
+.shuffle:active {
+  color: #aaa;
+}
 
 .repeat {
   width: 30px;
@@ -136,6 +139,9 @@
 }
 .repeat:hover {
   color: #fff;
+}
+.repeat:active {
+  color: #aaa;
 }
 
 .other-buttons {
@@ -153,6 +159,9 @@
 .lyrics:hover {
   color: #fff
 }
+.lyrics:active {
+  color: #aaa;
+}
 
 .queue {
   width: 30px;
@@ -163,6 +172,9 @@
 }
 .queue:hover {
   color: #fff
+}
+.queue:active {
+  color: #aaa;
 }
 
 .devices {
@@ -175,6 +187,9 @@
 .devices:hover {
   color: #fff
 }
+.devices:active {
+  color: #aaa;
+}
 
 .fullscreen {
   width: 30px;
@@ -185,6 +200,9 @@
 }
 .fullescreen:hover {
   color: #fff
+}
+.fullscreen:active {
+  color: #aaa;
 }
 
 .volume-button {
@@ -197,6 +215,9 @@
 }
 .volume-button:hover {
   color: #fff
+}
+.volume-button:active {
+  color: #aaa;
 }
 
 .volume {
