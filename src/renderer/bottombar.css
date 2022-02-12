@@ -97,6 +97,9 @@
 .backward:hover {
   color: #fff;
 }
+.backward:active {
+  color: #aaa;
+}
 
 .forward {
   width: 40px;
@@ -109,4 +112,28 @@
 .forward:hover {
   color: #fff;
 }
+.forward:active {
+  color: #aaa;
+}
 
+.shuffle {
+  width: 30px;
+  height: 30px;
+  font-size: 1em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.shuffle:hover {
+  color: #fff;
+}
+
+.repeat {
+  width: 30px;
+  height: 30px;
+  font-size: 1em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.repeat:hover {
+  color: #fff;
+}
