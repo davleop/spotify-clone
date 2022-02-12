@@ -6,16 +6,19 @@ class BottomBar extends Component {
     super(props);
     this.state = {
       value: 0,
-      play: false,
-      shuffle: false,
       repeat: 0,
       volume: 100,
+      play: false,
+      shuffle: false,
+      lyrics: false,
+      queue: false,
+      devices: false,
+      fullscreen: false,
       shuffle_color: `#cacaca`,
       repeat_color: `#cacaca`,
       lyrics_color: `#cacaca`,
       queue_color: `#cacaca`,
       devices_color: `#cacaca`,
-      fullscreen: false,
       current_repeat_class: `bi bi-arrow-repeat d-flex justify-content-center align-items-center repeat`,
     };
 
