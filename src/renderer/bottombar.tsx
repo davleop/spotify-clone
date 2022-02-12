@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/bootstrap-icons.svg';
 import './bottombar.css';
 
 class BottomBar extends Component {
@@ -28,31 +29,52 @@ class BottomBar extends Component {
       <div id="botbar">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm"></div>
-            <div className="col-sm">
+            <div className="col-sm-4"></div>
+            <div className="col-sm-4">
               <div className="playpause">
-                <input type="checkbox" value="None" id="playpause" name="check" />
+                <button
+                  aria-label="Back"
+                  id="backward skip-start-fill"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  className="bi bi-skip-start-fill d-flex justify-content-center align-items-center backward"
+                />
+
+                <input
+                  type="checkbox"
+                  value="None"
+                  id="playpause"
+                  name="check"
+                />
                 <label htmlFor="playpause" tabIndex={1} />
+
+                <button
+                  aria-label="Fore"
+                  id="foward"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  className="bi bi-skip-end-fill d-flex justify-content-center align-items-center forward"
+                />
               </div>
             </div>
-            <div className="col-sm"></div>
+            <div className="col-sm-4"></div>
           </div>
 
           <div className="row">
-            <div className="col-sm"></div>
-            <div className="col-sm">
+            <div className="col-sm-4"></div>
+            <div className="col-sm-4">
               <div className="timeline">
                 <input
                   id="rangevalue"
                   type="range"
-                  min="0"
-                  max="100"
+                  min=""
+                  max=""
                   onChange={this.handleChange}
                   defaultValue="0"
                 />
               </div>
             </div>
-            <div className="col-sm"></div>
+            <div className="col-sm-4"></div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@
       content="script-src 'self' 'unsafe-inline'"
     />
     <title>Spotify-Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   </head>
   <body>
     <div id="root"></div>
@@ -17,23 +18,5 @@
     });
 
     window.electron.ipcRenderer.myPing();
-
-    /*const rangeInputs = document.querySelectorAll('input[type="range"]')
-
-    function handleInputChange(e) {
-      let target = e.target
-      if (e.target.type !== 'range') {
-        target = document.getElementById('rangevalue')
-      }
-      const min = target.min
-      const max = target.max
-      const val = target.value
-
-      target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
-    }
-
-    rangeInputs.forEach(input => {
-      input.addEventListener('input', handleInputChange)
-    })*/
   </script>
 </html>

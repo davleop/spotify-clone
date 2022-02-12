@@ -17,7 +17,7 @@
 }
 
 .playpause {
-  margin-bottom: 4%;
+  margin-bottom: 1%;
   display: flex;
   justify-content: center;
 
@@ -85,3 +85,28 @@
     background: transparent;
   }
 }
+
+.backward {
+  width: 40px;
+  height: 30px;
+  margin-right: 10px;
+  font-size: 2em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.backward:hover {
+  color: #fff;
+}
+
+.forward {
+  width: 40px;
+  height: 30px;
+  margin-left: 10px;
+  font-size: 2em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.forward:hover {
+  color: #fff;
+}
+
