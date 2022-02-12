@@ -5,8 +5,11 @@ class BottomBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: 0,
+      play: false,
       shuffle: false,
       repeat: 0,
+      volume: 100,
       shuffle_color: `#cacaca`,
       repeat_color: `#cacaca`,
       current_repeat_class: `bi bi-arrow-repeat d-flex justify-content-center align-items-center repeat`,
@@ -18,6 +21,22 @@ class BottomBar extends Component {
     this.handleBackward = this.handleBackward.bind(this);
     this.handleShuffle = this.handleShuffle.bind(this);
     this.handleRepeat = this.handleRepeat.bind(this);
+    this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handleLyrics = this.handleLyrics.bind(this);
+    this.handleQueue = this.handleQueue.bind(this);
+    this.handleDevices = this.handleDevices.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
+    this.handleFullScreen = this.handleFullScreen.bind(this);
+  }
+
+  handlePlayPause(event) {
+    if (this.state.play) {
+      console.log('paused');
+      this.setState({ play: !this.state.play });
+    } else {
+      console.log('playing');
+      this.setState({ play: !this.state.play });
+    }
   }
 
   handleChange(event) {
@@ -73,6 +92,25 @@ class BottomBar extends Component {
     }
   }
 
+  handleLyrics(event) {}
+
+  handleQueue(event) {}
+
+  handleDevices(evnet) {}
+
+  handleVolumeButton(event) {}
+
+  handleVolume(event) {
+    this.setState({ volume: event.target.value });
+    const val = event.target.value;
+    const { min } = event.target;
+    const { max } = event.target;
+    const sz = ((val - min) * 100) / (max - min);
+    event.target.style.backgroundSize = `${sz}% 100%`;
+  }
+
+  handleFullScreen(event) {}
+
   render() {
     return (
       <div id="botbar">
@@ -103,6 +141,8 @@ class BottomBar extends Component {
                   value="None"
                   id="playpause"
                   name="check"
+                  defaultChecked={true}
+                  onChange={this.handlePlayPause}
                 />
                 <label htmlFor="playpause" tabIndex={1} />
 
@@ -124,7 +164,37 @@ class BottomBar extends Component {
                 />
               </div>
             </div>
-            <div className="col-sm-4"></div>
+            <div className="col-sm-2" />
+            <div className="col-sm-2  other-buttons">
+              <button
+                aria-label="Lyrics"
+                id="lyrics"
+                type="submit"
+                onClick={this.handleLyrics}
+                className="bi bi-chat-square-quote-fill d-flex justify-content-center align-items-center lyrics"
+              />
+              <button
+                aria-label="Queue"
+                id="queue"
+                type="submit"
+                onClick={this.handleQueue}
+                className="bi bi-music-note-list d-flex justify-content-center align-items-center queue"
+              />
+              <button
+                aria-label="Devices"
+                id="devices"
+                type="submit"
+                onClick={this.handleDevices}
+                className="bi bi-pc-display d-flex justify-content-center align-items-center devices"
+              />
+              <button
+                aria-label="Fullscreen"
+                id="fullscreen"
+                type="submit"
+                onClick={this.handleFullScreen}
+                className="bi bi-fullscreen d-flex justify-content-center align-items-center fullscreen"
+              />
+            </div>
           </div>
 
           <div className="row">
@@ -134,14 +204,36 @@ class BottomBar extends Component {
                 <input
                   id="rangevalue"
                   type="range"
-                  min=""
-                  max=""
+                  min="0"
+                  max="0"
+                  value={this.state.value}
                   onChange={this.handleChange}
                   defaultValue="0"
                 />
               </div>
             </div>
-            <div className="col-sm-4"></div>
+            <div className="col-sm-2" />
+            <div className="col-sm-2 other-buttons">
+              <button
+                aria-label="VolumeButton"
+                id="volume-button"
+                type="submit"
+                onClick={this.handleVolumeButton}
+                className="bi bi-volume-up-fill d-flex justify-content-center align-items-center volume-button"
+              />
+              <div className="volume">
+                <input
+                  id="rangevolume"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={this.state.volume}
+                  onChange={this.handleVolume}
+                  defaultValue="100"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

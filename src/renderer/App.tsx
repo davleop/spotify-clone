@@ -4,7 +4,7 @@ import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 
-const Hello = () => {
+const LetsGo = () => {
   return (
     <div className="">
       <MainNavBar />
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route path="/" element={<LetsGo />} />
       </Routes>
     </Router>
   );
