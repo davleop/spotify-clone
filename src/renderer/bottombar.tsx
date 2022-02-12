@@ -30,8 +30,6 @@ class BottomBar extends Component {
     this.handleVolume = this.handleVolume.bind(this);
     this.handleDevices = this.handleDevices.bind(this);
     this.handleShuffle = this.handleShuffle.bind(this);
-    this.handleForward = this.handleForward.bind(this);
-    this.handleBackward = this.handleBackward.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleFullScreen = this.handleFullScreen.bind(this);
   }
@@ -46,6 +44,14 @@ class BottomBar extends Component {
     }
   }
 
+  handleForward(event) {
+    console.log('forward');
+  }
+
+  handleBackward(event) {
+    console.log('backward');
+  }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
     const val = event.target.value;
@@ -57,14 +63,6 @@ class BottomBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-  }
-
-  handleForward(event) {
-    console.log('forward');
-  }
-
-  handleBackward(event) {
-    console.log('backward');
   }
 
   handleShuffle(event) {
@@ -155,22 +153,7 @@ class BottomBar extends Component {
       <div id="botbar">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-2 left-buttons">
-              <button
-                aria-label="PageBack"
-                id="page-back"
-                type="button"
-                onClick={this.handlePageBack}
-                className="bi bi-arrow-left-circle-fill d-flex justify-content-center align-items-center back-page"
-              />
-              <button
-                aria-label="PageForward"
-                id="page-forward"
-                type="button"
-                onClick={this.handlePageForward}
-                className="bi bi-arrow-right-circle-fill d-flex justify-content-center align-items-center back-page"
-              />
-            </div>
+            <div className="col-sm-2" />
             <div className="col-sm-2" />
             <div className="col-sm-4">
               <div className="playpause">

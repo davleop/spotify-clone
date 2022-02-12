@@ -56,3 +56,20 @@
 .bicon {
   margin-right: 10px;
 }
+
+.back-page {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: -12px;
+  font-size: 2em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.back-page:hover {
+  color: #fff
+}
+.back-page:active {
+  color: #aaa;
+}
+
