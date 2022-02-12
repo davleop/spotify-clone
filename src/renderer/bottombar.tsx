@@ -212,8 +212,7 @@ class BottomBar extends Component {
                 />
               </div>
             </div>
-            <div className="col-sm-2" />
-            <div className="col-sm-2 other-buttons">
+            <div className="col-sm-4 other-buttons">
               <button
                 aria-label="VolumeButton"
                 id="volume-button"
@@ -233,7 +232,6 @@ class BottomBar extends Component {
                 />
               </div>
             </div>
-
           </div>
         </div>
       </div>
