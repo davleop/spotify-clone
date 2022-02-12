@@ -1,8 +1,5 @@
 import { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-icons/bootstrap-icons.svg';
 import './bottombar.css';
-import internal from 'stream';
 
 class BottomBar extends Component {
   constructor(props) {
@@ -37,11 +34,11 @@ class BottomBar extends Component {
   }
 
   handleForward(event) {
-    //
+    console.log('forward');
   }
 
   handleBackward(event) {
-    //
+    console.log('backward');
   }
 
   handleShuffle(event) {
@@ -94,10 +91,10 @@ class BottomBar extends Component {
                 />
 
                 <button
-                  aria-label="Back"
+                  aria-label="Backward"
                   id="backward"
                   type="submit"
-                  onClick={this.handleForward}
+                  onClick={this.handleBackward}
                   className="bi bi-skip-start-fill d-flex justify-content-center align-items-center backward"
                 />
 
@@ -110,10 +107,10 @@ class BottomBar extends Component {
                 <label htmlFor="playpause" tabIndex={1} />
 
                 <button
-                  aria-label="Fore"
-                  id="foward"
+                  aria-label="Forward"
+                  id="forward"
                   type="submit"
-                  onClick={this.handleBackward}
+                  onClick={this.handleForward}
                   className="bi bi-skip-end-fill d-flex justify-content-center align-items-center forward"
                 />
 
