@@ -262,3 +262,35 @@
     background: transparent;
   }
 }
+
+.left-buttons {
+  display: flex;
+  justify-content: left;
+}
+
+.back-page {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0% 1% 0% 30px;
+  font-size: 2em;
+  color: #cacaca;
+  background-color: transparent;
+}
+.back-page:hover {
+  color: #fff
+}
+.back-page:active {
+  color: #aaa;
+}
+
+.acc-acc {
+  position: relative;
+  width: 80%;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 30px;
+  color: #cacaca;
+  border-color: #000;
+  background-color: #000;
+}

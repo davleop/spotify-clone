@@ -9,30 +9,30 @@ class BottomBar extends Component {
       repeat: 0,
       volume: 100,
       play: false,
-      shuffle: false,
-      lyrics: false,
       queue: false,
+      lyrics: false,
       devices: false,
+      shuffle: false,
       fullscreen: false,
-      shuffle_color: `#cacaca`,
+      queue_color: `#cacaca`,
       repeat_color: `#cacaca`,
       lyrics_color: `#cacaca`,
-      queue_color: `#cacaca`,
+      shuffle_color: `#cacaca`,
       devices_color: `#cacaca`,
       current_repeat_class: `bi bi-arrow-repeat d-flex justify-content-center align-items-center repeat`,
     };
 
+    this.handleQueue = this.handleQueue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRepeat = this.handleRepeat.bind(this);
+    this.handleLyrics = this.handleLyrics.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
+    this.handleDevices = this.handleDevices.bind(this);
+    this.handleShuffle = this.handleShuffle.bind(this);
     this.handleForward = this.handleForward.bind(this);
     this.handleBackward = this.handleBackward.bind(this);
-    this.handleShuffle = this.handleShuffle.bind(this);
-    this.handleRepeat = this.handleRepeat.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
-    this.handleLyrics = this.handleLyrics.bind(this);
-    this.handleQueue = this.handleQueue.bind(this);
-    this.handleDevices = this.handleDevices.bind(this);
-    this.handleVolume = this.handleVolume.bind(this);
     this.handleFullScreen = this.handleFullScreen.bind(this);
   }
 
@@ -99,11 +99,35 @@ class BottomBar extends Component {
     }
   }
 
-  handleLyrics(event) {}
+  handleLyrics(event) {
+    if (this.state.lyrics) {
+      this.setState({ lyrics: false });
+      this.setState({ lyrics_color: `#cacaca` });
+    } else {
+      this.setState({ lyrics: true });
+      this.setState({ lyrics_color: `#1db954` });
+    }
+  }
 
-  handleQueue(event) {}
+  handleQueue(event) {
+    if (this.state.queue) {
+      this.setState({ queue: false });
+      this.setState({ queue_color: `#cacaca` });
+    } else {
+      this.setState({ queue: true });
+      this.setState({ queue_color: `#1db954` });
+    }
+  }
 
-  handleDevices(evnet) {}
+  handleDevices(evnet) {
+    if (this.state.devices) {
+      this.setState({ devices: false });
+      this.setState({ devices_color: `#cacaca` });
+    } else {
+      this.setState({ devices: true });
+      this.setState({ devices_color: `#1db954` });
+    }
+  }
 
   handleVolumeButton(event) {}
 
@@ -116,20 +140,44 @@ class BottomBar extends Component {
     event.target.style.backgroundSize = `${sz}% 100%`;
   }
 
-  handleFullScreen(event) {}
+  handleFullScreen(event) {
+    if (this.state.fullscreen) {
+      this.setState({ fullscreen: false });
+      console.log('fullscreen exit');
+    } else {
+      this.setState({ fullscreen: true });
+      console.log('fullscreen');
+    }
+  }
 
   render() {
     return (
       <div id="botbar">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-4"></div>
+            <div className="col-sm-2 left-buttons">
+              <button
+                aria-label="PageBack"
+                id="page-back"
+                type="button"
+                onClick={this.handlePageBack}
+                className="bi bi-arrow-left-circle-fill d-flex justify-content-center align-items-center back-page"
+              />
+              <button
+                aria-label="PageForward"
+                id="page-forward"
+                type="button"
+                onClick={this.handlePageForward}
+                className="bi bi-arrow-right-circle-fill d-flex justify-content-center align-items-center back-page"
+              />
+            </div>
+            <div className="col-sm-2" />
             <div className="col-sm-4">
               <div className="playpause">
                 <button
                   aria-label="Shuffle"
                   id="shuffle"
-                  type="submit"
+                  type="button"
                   onClick={this.handleShuffle}
                   style={{ color: this.state.shuffle_color }}
                   className="bi bi-shuffle d-flex justify-content-center align-items-center shuffle"
@@ -138,7 +186,7 @@ class BottomBar extends Component {
                 <button
                   aria-label="Backward"
                   id="backward"
-                  type="submit"
+                  type="button"
                   onClick={this.handleBackward}
                   className="bi bi-skip-start-fill d-flex justify-content-center align-items-center backward"
                 />
@@ -156,7 +204,7 @@ class BottomBar extends Component {
                 <button
                   aria-label="Forward"
                   id="forward"
-                  type="submit"
+                  type="button"
                   onClick={this.handleForward}
                   className="bi bi-skip-end-fill d-flex justify-content-center align-items-center forward"
                 />
@@ -164,7 +212,7 @@ class BottomBar extends Component {
                 <button
                   aria-label="Repeat"
                   id="repeat"
-                  type="submit"
+                  type="button"
                   onClick={this.handleRepeat}
                   style={{ color: this.state.repeat_color }}
                   className={this.state.current_repeat_class}
@@ -176,28 +224,31 @@ class BottomBar extends Component {
               <button
                 aria-label="Lyrics"
                 id="lyrics"
-                type="submit"
+                type="button"
                 onClick={this.handleLyrics}
+                style={{ color: this.state.lyrics_color }}
                 className="bi bi-chat-square-quote-fill d-flex justify-content-center align-items-center lyrics"
               />
               <button
                 aria-label="Queue"
                 id="queue"
-                type="submit"
+                type="button"
                 onClick={this.handleQueue}
+                style={{ color: this.state.queue_color }}
                 className="bi bi-music-note-list d-flex justify-content-center align-items-center queue"
               />
               <button
                 aria-label="Devices"
                 id="devices"
-                type="submit"
+                type="button"
                 onClick={this.handleDevices}
+                style={{ color: this.state.devices_color }}
                 className="bi bi-pc-display d-flex justify-content-center align-items-center devices"
               />
               <button
                 aria-label="Fullscreen"
                 id="fullscreen"
-                type="submit"
+                type="button"
                 onClick={this.handleFullScreen}
                 className="bi bi-fullscreen d-flex justify-content-center align-items-center fullscreen"
               />
@@ -205,7 +256,8 @@ class BottomBar extends Component {
           </div>
 
           <div className="row">
-            <div className="col-sm-4"></div>
+            <div className="col-sm-2"></div>
+            <div className="col-sm-2"></div>
             <div className="col-sm-4">
               <div className="timeline">
                 <input
@@ -223,7 +275,7 @@ class BottomBar extends Component {
               <button
                 aria-label="VolumeButton"
                 id="volume-button"
-                type="submit"
+                type="button"
                 onClick={this.handleVolumeButton}
                 className="bi bi-volume-up-fill d-flex justify-content-center align-items-center volume-button"
               />
