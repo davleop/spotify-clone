@@ -66,7 +66,7 @@ class MainNavBar extends Component {
               <ul className={menuClass} aria-labelledby="account-dropdown">
                 <li>
                   <a className="dropdown-item" href="/">
-                    Account
+                    Account <span className="bi bi-box-arrow-up-right" />
                   </a>
                 </li>
                 <li>
@@ -97,15 +97,15 @@ class MainNavBar extends Component {
           </div>
         </div>
 
-        <a href="/">
+        <a className="norm-btn" href="/">
           <span className="bi bi-house-door-fill bicon" />
           Home
         </a>
-        <a href="/">
+        <a className="norm-btn" href="/">
           <span className="bi bi-search bicon" />
           Search
         </a>
-        <a href="/">
+        <a className="norm-btn" href="/">
           <span className="bi bi-collection-fill bicon" />
           Your Library
         </a>
@@ -113,7 +113,7 @@ class MainNavBar extends Component {
         <hr />
 
         <div id="playlists">
-          <a href="/">
+          <a className="norm-btn" href="/">
             <span className="bi bi-plus-square-fill bicon" />
             Create Playlist
           </a>
