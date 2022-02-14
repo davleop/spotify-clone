@@ -1,0 +1,43 @@
+.overlay {
+  z-index: 100;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0.7;
+}
+
+.login-form {
+  z-index: 1000;
+  margin-top: 45%;
+  background-color: #121212;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  border-radius: 3%;
+  width: 100%;
+  height: 130px;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+.login-form h1 {
+  color: #fff;
+}
+
+.go-spotify {
+  background-color: #fff;
+  border: 2px solid #fff;
+  line-height: 15px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  margin-top: 15px;
+}

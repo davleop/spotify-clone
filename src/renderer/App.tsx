@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
+import Login from './login';
 
 const LetsGo = () => {
   const ref = useRef();
@@ -31,11 +32,22 @@ const LetsGo = () => {
   );
 };
 
+const LetsLogin = () => {
+  return (
+    <div className="">
+      <Login />
+      <MainNavBar />
+      <BottomBar />
+    </div>
+  );
+};
+
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LetsGo />} />
+        <Route path="/" element={<LetsLogin />} />
+        <Route path="/success" element={<LetsGo />} />
       </Routes>
     </Router>
   );
