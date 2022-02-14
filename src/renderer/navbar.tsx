@@ -28,7 +28,9 @@ class MainNavBar extends Component {
   }
 
   render() {
-    const menuClass = `account-dropbox dropdown-menu${this.state.isOpen ? " show" : ""}`;
+    const menuClass = `account-dropbox dropdown-menu${
+      this.props.open ? ' show' : ''
+    }`;
     return (
       <div id="nav">
         <div className="row">
@@ -52,10 +54,10 @@ class MainNavBar extends Component {
             />
           </div>
           <div className="col-sm">
-            <div className="dropdown">
+            <div className="dropdown" ref={this.props.re}>
               <button
                 id="account-dropdown"
-                onClick={this.toggleOpen}
+                onClick={() => this.props.setOpen((oldState) => !oldState)}
                 type="button"
                 className="btn dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -63,36 +65,39 @@ class MainNavBar extends Component {
               >
                 <span className="bi bi-person-circle account-icon" />
               </button>
-              <ul className={menuClass} aria-labelledby="account-dropdown">
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Account <span className="bi bi-box-arrow-up-right" />
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Private session
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Log out
-                  </a>
-                </li>
-              </ul>
+              {this.props.open && (
+                <ul className={menuClass} aria-labelledby="account-dropdown">
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Account{' '}
+                      <span className="bi bi-box-arrow-up-right float-end" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Private session
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Log out
+                    </a>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
