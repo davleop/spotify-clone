@@ -1,3 +1,4 @@
+import { electron } from 'process';
 import { Component } from 'react';
 import './bottombar.css';
 
@@ -146,6 +147,7 @@ class BottomBar extends Component {
       this.setState({ fullscreen: true });
       console.log('fullscreen');
     }
+    window.electron.ipcRenderer.fullscreen();
   }
 
   render() {

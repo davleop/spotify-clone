@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, remote } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -31,6 +31,17 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('fullscreen', async () => {
+  // const focusedWindow = remote.getCurrentWindow();
+  if (!mainWindow?.isFullScreen()) {
+    console.log('fullscreen');
+    // focusedWindow.setFullScreen(true);
+  } else {
+    console.log('exiting');
+    // focusedWindow.setFullScreen(false);
+  }
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -109,7 +120,7 @@ const createWindow = async () => {
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
-  new AppUpdater();
+  //new AppUpdater();
 };
 
 /**
