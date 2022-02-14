@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, remote } from 'electron';
+import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -34,13 +34,12 @@ ipcMain.on('ipc-example', async (event, arg) => {
 });
 
 ipcMain.on('fullscreen', async () => {
-  // const focusedWindow = remote.getCurrentWindow();
   if (!mainWindow?.isFullScreen()) {
     console.log('fullscreen');
-    // focusedWindow.setFullScreen(true);
-  } else {
-    console.log('exiting');
-    // focusedWindow.setFullScreen(false);
+    await mainWindow?.setFullScreen(true);
+  } else if (mainWindow?.isFullScreen()){
+    console.log('exiting fullscreen');
+    await mainWindow?.setFullScreen(false);
   }
 });
 

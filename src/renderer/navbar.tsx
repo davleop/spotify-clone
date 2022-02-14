@@ -5,18 +5,10 @@ class MainNavBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isOpen: false,
-    };
+    this.state = {};
 
     this.handlePageForward = this.handlePageForward.bind(this);
     this.handlePageBackward = this.handlePageBackward.bind(this);
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-
-  // eslint-disable-next-line react/sort-comp
-  toggleOpen(_event: unknown) {
-    this.setState({ isOpen: !this.state.isOpen });
   }
 
   handlePageForward(event) {

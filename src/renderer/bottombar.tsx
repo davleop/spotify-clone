@@ -14,7 +14,7 @@ class BottomBar extends Component {
       lyrics: false,
       devices: false,
       shuffle: false,
-      fullscreen: false,
+      fullsceen: false,
       queue_color: `#cacaca`,
       repeat_color: `#cacaca`,
       lyrics_color: `#cacaca`,
@@ -151,6 +151,9 @@ class BottomBar extends Component {
   }
 
   render() {
+    const fullscreenClass = `bi ${
+      this.state.fullscreen ? 'bi-fullscreen-exit' : 'bi-fullscreen'
+    } d-flex justify-content-center align-items-center fullscreen`;
     return (
       <div id="botbar">
         <div className="container-fluid">
@@ -235,7 +238,7 @@ class BottomBar extends Component {
                 id="fullscreen"
                 type="button"
                 onClick={this.handleFullScreen}
-                className="bi bi-fullscreen d-flex justify-content-center align-items-center fullscreen"
+                className={fullscreenClass}
               />
             </div>
           </div>
