@@ -5,6 +5,7 @@ import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
+import Portal from './portal';
 
 const LetsGo = () => {
   const ref = useRef();
@@ -42,12 +43,21 @@ const LetsLogin = () => {
   );
 };
 
+const SpotifyPage = () => {
+  return (
+    <Portal>
+      <h1>bar</h1>
+    </Portal>
+  );
+};
+
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LetsGo />} />
-        <Route path="/success" element={<LetsGo />} />
+        <Route path="/" element={<LetsLogin />} />
+        <Route path="/login" element={<SpotifyPage />} />
+        <Route path="/callback" element={<LetsGo />} />
       </Routes>
     </Router>
   );

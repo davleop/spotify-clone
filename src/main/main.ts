@@ -37,7 +37,7 @@ ipcMain.on('fullscreen', async () => {
   if (!mainWindow?.isFullScreen()) {
     console.log('fullscreen');
     await mainWindow?.setFullScreen(true);
-  } else if (mainWindow?.isFullScreen()){
+  } else if (mainWindow?.isFullScreen()) {
     console.log('exiting fullscreen');
     await mainWindow?.setFullScreen(false);
   }

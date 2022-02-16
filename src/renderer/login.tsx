@@ -17,7 +17,6 @@ class Login extends Component {
       <div className="box-holder">
         <div className="overlay" />
         <div className="login-form">
-          <h1>Please log in to continue</h1>
           <button
             type="button"
             className="go-spotify"
