@@ -46,7 +46,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LetsLogin />} />
+        <Route path="/" element={<LetsGo />} />
         <Route path="/success" element={<LetsGo />} />
       </Routes>
     </Router>
