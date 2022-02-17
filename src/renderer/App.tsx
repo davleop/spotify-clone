@@ -1,10 +1,17 @@
-import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  MemoryRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { useRef, useEffect, useState } from 'react';
 // import icon from '../../assets/icon.svg';
 import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
+
+let loggedIn = window.electron.ipcRenderer.isLoggedIn();
 
 const LetsGo = () => {
   const ref = useRef();
@@ -54,11 +61,14 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<LetsLogin />}>
-          <Route path="callback" element={<LetsGo />} />
-          <Route exact path="login" element={<SpotifyPage />} />
-          <Route path="*" element={<NoMatch />} />
-        </Route>
+        <Route
+          path="/"
+          element={loggedIn ? <Navigate to="/home" /> : <LetsLogin />}
+        />
+        <Route path="/home" element={<LetsGo />} />
+        <Route path="/callback/:code" />
+        <Route path="/login" element={<SpotifyPage />} />
+        <Route path="/*" element={<NoMatch />} />
       </Routes>
     </Router>
   );

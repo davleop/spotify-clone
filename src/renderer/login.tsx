@@ -11,10 +11,10 @@ class Login extends Component {
       url: null,
     };
 
-    /*window.electron.ipcRenderer.once('login-spotify', (arg) => {
+    window.electron.ipcRenderer.once('login-spotify', (arg) => {
       this.setState({ url: arg });
     });
-    window.electron.ipcRenderer.popup();*/
+    window.electron.ipcRenderer.spotifyLogin();
 
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -24,18 +24,19 @@ class Login extends Component {
   }
 
   render() {
+    const { url } = this.state;
     return (
       <div className="box-holder">
         <div className="overlay" />
         <div className="login-form">
-          <Link
-            to={{ pathname: '/callback' }}
+          <a
+            href={url}
             role="button"
             className="butt go-spotify"
             onClick={this.handleLogin}
           >
             Login
-          </Link>
+          </a>
         </div>
       </div>
     );

@@ -66,4 +66,5 @@
 .butt:hover {
   transform: scale(1.05);
   opacity: 1;
+  border: 2px solid #fff;
 }

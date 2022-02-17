@@ -131,10 +131,13 @@ const createPopup = async (webpage: string) => {
 
   popup = new BrowserWindow({
     show: false,
-    width: 728,
+    width: 900,
     height: 728,
     frame: false,
     titleBarStyle: 'hidden',
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 
   popup.loadURL(webpage);
@@ -183,10 +186,19 @@ ipcMain.on('fullscreen', async () => {
   }
 });
 
-ipcMain.on('login-spotify', async () => {
+ipcMain.on('login-spotify', async (event) => {
   const reply = spotify.authUri;
-  // event.reply('login-spotify', reply);
-  createPopup(reply);
+  event.reply('login-spotify', reply);
+});
+
+ipcMain.on('popup', async () => {
+  const reply = spotify.authUri;
+  if (popup === null) createPopup(reply);
+});
+
+ipcMain.on('logged-in', async (event) => {
+  const loggedIn = false;
+  event.reply('loggin-in', loggedIn);
 });
 
 app.on('window-all-closed', () => {
