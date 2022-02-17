@@ -1,11 +1,10 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import { useRef, useEffect, useState } from 'react';
 // import icon from '../../assets/icon.svg';
 import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
-import Portal from './portal';
 
 const LetsGo = () => {
   const ref = useRef();
@@ -43,21 +42,23 @@ const LetsLogin = () => {
   );
 };
 
+const NoMatch = () => {
+  return <div className="">404 Page</div>;
+};
+
 const SpotifyPage = () => {
-  return (
-    <Portal>
-      <h1>bar</h1>
-    </Portal>
-  );
+  return <div />;
 };
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LetsLogin />} />
-        <Route path="/login" element={<SpotifyPage />} />
-        <Route path="/callback" element={<LetsGo />} />
+        <Route exact path="/" element={<LetsLogin />}>
+          <Route path="callback" element={<LetsGo />} />
+          <Route exact path="login" element={<SpotifyPage />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
       </Routes>
     </Router>
   );

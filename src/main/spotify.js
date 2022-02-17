@@ -38,3 +38,5 @@ class SpotApi {
     console.log(this.authUri);
   }
 }
+
+export default SpotApi;

@@ -1,30 +1,41 @@
+import { NONAME } from 'dns';
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './login.css';
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      url: null,
+    };
 
-    this.handleClick = this.handleClick.bind(this);
+    /*window.electron.ipcRenderer.once('login-spotify', (arg) => {
+      this.setState({ url: arg });
+    });
+    window.electron.ipcRenderer.popup();*/
+
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleClick(event) {}
+  handleLogin(event) {
+    window.electron.ipcRenderer.popup();
+  }
 
   render() {
     return (
       <div className="box-holder">
         <div className="overlay" />
         <div className="login-form">
-          <button
-            type="button"
-            className="go-spotify"
-            data-mdb-ripple-color="dark"
-            onClick={this.handleClick}
+          <Link
+            to={{ pathname: '/callback' }}
+            role="button"
+            className="butt go-spotify"
+            onClick={this.handleLogin}
           >
             Login
-          </button>
+          </Link>
         </div>
       </div>
     );

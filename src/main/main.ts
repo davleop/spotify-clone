@@ -16,6 +16,9 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import SpotApi from './spotify';
+
+const spotify = new SpotApi();
 
 export default class AppUpdater {
   constructor() {
@@ -26,21 +29,12 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let popup: BrowserWindow | null = null;
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
-});
-
-ipcMain.on('fullscreen', async () => {
-  if (!mainWindow?.isFullScreen()) {
-    console.log('fullscreen');
-    await mainWindow?.setFullScreen(true);
-  } else if (mainWindow?.isFullScreen()) {
-    console.log('exiting fullscreen');
-    await mainWindow?.setFullScreen(false);
-  }
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -122,9 +116,78 @@ const createWindow = async () => {
   //new AppUpdater();
 };
 
+const createPopup = async (webpage: string) => {
+  if (isDevelopment) {
+    await installExtensions();
+  }
+
+  const RESOURCES_PATH = app.isPackaged
+    ? path.join(process.resourcesPath, 'assets')
+    : path.join(__dirname, '../../assets');
+
+  const getAssetPath = (...paths: string[]): string => {
+    return path.join(RESOURCES_PATH, ...paths);
+  };
+
+  popup = new BrowserWindow({
+    show: false,
+    width: 728,
+    height: 728,
+    frame: false,
+    titleBarStyle: 'hidden',
+  });
+
+  popup.loadURL(webpage);
+
+  popup.on('ready-to-show', () => {
+    if (!popup) {
+      throw new Error('"popup" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      popup.minimize();
+    } else {
+      popup.show();
+    }
+  });
+
+  popup.on('closed', () => {
+    popup = null;
+  });
+
+  // const menuBuilder = new MenuBuilder(popup);
+  // menuBuilder.buildMenu();
+  popup.setMenu(null);
+  popup.setMenuBarVisibility(false);
+
+  // Open urls in the user's browser
+  popup.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
+
+  // Remove this if your app does not use auto updates
+  // eslint-disable-next-line
+  //new AppUpdater();
+};
+
 /**
  * Add event listeners...
  */
+ipcMain.on('fullscreen', async () => {
+  if (!mainWindow?.isFullScreen()) {
+    console.log('fullscreen');
+    await mainWindow?.setFullScreen(true);
+  } else if (mainWindow?.isFullScreen()) {
+    console.log('exiting fullscreen');
+    await mainWindow?.setFullScreen(false);
+  }
+});
+
+ipcMain.on('login-spotify', async () => {
+  const reply = spotify.authUri;
+  // event.reply('login-spotify', reply);
+  createPopup(reply);
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
