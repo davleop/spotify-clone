@@ -13,7 +13,7 @@ import Login from './login';
 
 let loggedIn = window.electron.ipcRenderer.isLoggedIn();
 
-const LetsGo = () => {
+const Home = () => {
   const ref = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -24,10 +24,10 @@ const LetsGo = () => {
       }
     };
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener('mousedown', checkIfClickedOutside);
 
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.removeEventListener('mousedown', checkIfClickedOutside);
     };
   }, [isMenuOpen]);
 
@@ -53,10 +53,6 @@ const NoMatch = () => {
   return <div className="">404 Page</div>;
 };
 
-const SpotifyPage = () => {
-  return <div />;
-};
-
 export default function App() {
   return (
     <Router>
@@ -65,10 +61,9 @@ export default function App() {
           path="/"
           element={loggedIn ? <Navigate to="/home" /> : <LetsLogin />}
         />
-        <Route path="/home" element={<LetsGo />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/callback/:code" />
-        <Route path="/login" element={<SpotifyPage />} />
-        <Route path="/*" element={<NoMatch />} />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
     </Router>
   );
