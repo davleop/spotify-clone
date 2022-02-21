@@ -11,7 +11,7 @@ import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
 
-let loggedIn = window.electron.ipcRenderer.isLoggedIn();
+let loggedIn = true; // window.electron.ipcRenderer.isLoggedIn();
 
 const Home = () => {
   const ref = useRef();
