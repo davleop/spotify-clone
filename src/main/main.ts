@@ -122,7 +122,6 @@ const createWindow = async () => {
     parent: mainWindow,
     width: 400,
     height: 600,
-    alwaysOnTop: true,
     frame: false,
     titleBarStyle: 'hidden',
     webPreferences: {
@@ -155,15 +154,13 @@ ipcMain.on('close-popup', async () => {
 });
 
 ipcMain.on('logged-in', async (event) => {
-  if (spotify.code === null) {
-    event.reply('loggin-in', false);
-  } else {
-    event.reply('logged-in', true);
-  }
+  console.log(spotify.loggedIn);
+  event.reply(spotify.loggedIn);
 });
 
 ipcMain.on('set-code', async (event, code) => {
-  spotify.setCode(code);
+  console.log(code);
+  spotify.setCode(event, code);
 });
 
 app.on('window-all-closed', () => {

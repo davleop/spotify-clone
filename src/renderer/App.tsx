@@ -4,14 +4,12 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, SetStateAction } from 'react';
 // import icon from '../../assets/icon.svg';
 import './App.css';
 import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
-
-let loggedIn = window.electron.ipcRenderer.isLoggedIn();
 
 const Home = () => {
   const ref = useRef();
@@ -49,15 +47,14 @@ const LetsLogin = () => {
   );
 };
 
-const callback = (comp: JSX.Element) => {
+const callback = (setter: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; }, comp: JSX.Element) => {
   window.electron.ipcRenderer.closePopup();
   const code = new URL(window.location.href).searchParams.get('code');
 
   if (code !== null) {
     console.log(`FROM THE OUTSIDE ${code}`);
     window.electron.ipcRenderer.setCode('set-code', code);
-    loggedIn = window.electron.ipcRenderer.isLoggedIn();
-    console.log(`Logged in? ${loggedIn}`);
+    setter(true);
   }
 
   return comp;
@@ -68,17 +65,25 @@ const NoMatch = () => {
 };
 
 export default function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    //
+  });
+
   return (
     <Router>
       <Routes>
         <Route
           path="/"
-          element={loggedIn ? <Navigate to="/home" /> : <LetsLogin />}
-        >
-          <Route path="home" element={<Home />} />
-          <Route path="callback" element={callback(<Navigate to="/home" />)} />
-          <Route path="*" element={<NoMatch />} />
-        </Route>
+          element={isLoggedIn ? <Navigate to="/home" /> : <LetsLogin />}
+        />
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/callback"
+          element={callback(setLoggedIn, <Navigate to="/" />)}
+        />
+        <Route path="/*" element={<NoMatch />} />
       </Routes>
     </Router>
   );

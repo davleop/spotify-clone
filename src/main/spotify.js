@@ -35,24 +35,32 @@ class SpotApi {
 
     this.authUri = this.spotifyApi.createAuthorizeURL(scopes);
     this.code = null;
+    this.loggedIn = false;
   }
 
-  setCode(code) {
-    this.spotifyApi
-      .authorizationCodeGrant(code)
-      .then(
-        (data) => {
-          console.log(`Expires in ${data.body.expires_in}`);
-          console.log(`Access token ${data.body.access_token}`);
-          console.log(`Refresh token ${data.body.refresh_token}`);
-        },
-        (err) => {
-          console.log('Something went wrong!', err);
-        }
-      )
-      .catch(console.log);
+  setCode(event, code) {
+    if (!this.loggedIn) {
+      console.log(`AUTHCODE: ${code}`);
+      this.spotifyApi
+        .authorizationCodeGrant(code)
+        .then(
+          (data) => {
+            console.log(`Expires in ${data.body.expires_in}`);
+            console.log(`Access token ${data.body.access_token}`);
+            console.log(`Refresh token ${data.body.refresh_token}`);
 
-    this.code = code;
+            this.spotifyApi.setAccessToken(data.body.access_token);
+            this.spotifyApi.setRefreshToken(data.body.refresh_token);
+          },
+          (err) => {
+            console.log('Something went wrong!', err);
+          }
+        )
+        .catch(console.log);
+
+      this.code = code;
+      this.loggedIn = true;
+    }
   }
 }
 
