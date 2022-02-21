@@ -32,10 +32,27 @@ class SpotApi {
       clientSecret: credentials.clientSecret,
       redirectUri: credentials.redirectUri,
     });
-    console.log(this.spotifyApi);
 
     this.authUri = this.spotifyApi.createAuthorizeURL(scopes);
-    console.log(this.authUri);
+    this.code = null;
+  }
+
+  setCode(code) {
+    this.spotifyApi
+      .authorizationCodeGrant(code)
+      .then(
+        (data) => {
+          console.log(`Expires in ${data.body.expires_in}`);
+          console.log(`Access token ${data.body.access_token}`);
+          console.log(`Refresh token ${data.body.refresh_token}`);
+        },
+        (err) => {
+          console.log('Something went wrong!', err);
+        }
+      )
+      .catch(console.log);
+
+    this.code = code;
   }
 }
 

@@ -1,19 +1,21 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+const CHANNELS = ['ipc-example', 'logged-in'];
+
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
     },
     on(channel, func) {
-      const validChannels = ['ipc-example', 'login-spotify', 'popup'];
+      const validChannels = CHANNELS;
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.on(channel, (event, ...args) => func(...args));
       }
     },
     once(channel, func) {
-      const validChannels = ['ipc-example', 'login-spotify', 'popup'];
+      const validChannels = CHANNELS;
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (event, ...args) => func(...args));
@@ -22,14 +24,17 @@ contextBridge.exposeInMainWorld('electron', {
     fullscreen() {
       ipcRenderer.send('fullscreen');
     },
-    popup() {
-      ipcRenderer.send('popup');
+    openPopup() {
+      ipcRenderer.send('open-popup');
     },
-    spotifyLogin() {
-      ipcRenderer.send('login-spotify');
+    closePopup() {
+      ipcRenderer.send('closed-popup');
     },
     isLoggedIn() {
       ipcRenderer.send('logged-in');
+    },
+    setCode(code) {
+      ipcRenderer.send('set-code', code);
     },
   },
 });

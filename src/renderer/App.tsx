@@ -11,7 +11,7 @@ import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
 
-let loggedIn = true; // window.electron.ipcRenderer.isLoggedIn();
+let loggedIn = window.electron.ipcRenderer.isLoggedIn();
 
 const Home = () => {
   const ref = useRef();
@@ -49,6 +49,20 @@ const LetsLogin = () => {
   );
 };
 
+const callback = (comp: JSX.Element) => {
+  window.electron.ipcRenderer.closePopup();
+  const code = new URL(window.location.href).searchParams.get('code');
+
+  if (code !== null) {
+    console.log(`FROM THE OUTSIDE ${code}`);
+    window.electron.ipcRenderer.setCode('set-code', code);
+    loggedIn = window.electron.ipcRenderer.isLoggedIn();
+    console.log(`Logged in? ${loggedIn}`);
+  }
+
+  return comp;
+};
+
 const NoMatch = () => {
   return <div className="">404 Page</div>;
 };
@@ -60,10 +74,11 @@ export default function App() {
         <Route
           path="/"
           element={loggedIn ? <Navigate to="/home" /> : <LetsLogin />}
-        />
-        <Route path="/home" element={<Home />} />
-        <Route path="/callback/:code" />
-        <Route path="*" element={<NoMatch />} />
+        >
+          <Route path="home" element={<Home />} />
+          <Route path="callback" element={callback(<Navigate to="/home" />)} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
       </Routes>
     </Router>
   );

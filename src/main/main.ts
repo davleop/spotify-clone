@@ -18,7 +18,7 @@ import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import SpotApi from './spotify';
 
-const spotify = new SpotApi();
+let spotify = new SpotApi();
 
 export default class AppUpdater {
   constructor() {
@@ -111,66 +111,25 @@ const createWindow = async () => {
     shell.openExternal(url);
   });
 
-  // Remove this if your app does not use auto updates
-  // eslint-disable-next-line
-  //new AppUpdater();
-};
+  mainWindow.on('move', () => {
+    const position = mainWindow?.getPosition();
+    if (mainWindow === null) throw new Error('mainWindow is null');
+    popup?.setPosition(position[0], position[1]);
+  });
 
-const createPopup = async (webpage: string) => {
-  if (isDevelopment) {
-    await installExtensions();
-  }
-
-  const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets');
-
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
-
+  // Create child popup window
   popup = new BrowserWindow({
-    show: false,
-    width: 900,
-    height: 728,
+    parent: mainWindow,
+    width: 400,
+    height: 600,
+    alwaysOnTop: true,
     frame: false,
     titleBarStyle: 'hidden',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
   });
-
-  popup.loadURL(webpage);
-
-  popup.on('ready-to-show', () => {
-    if (!popup) {
-      throw new Error('"popup" is not defined');
-    }
-    if (process.env.START_MINIMIZED) {
-      popup.minimize();
-    } else {
-      popup.show();
-    }
-  });
-
-  popup.on('closed', () => {
-    popup = null;
-  });
-
-  // const menuBuilder = new MenuBuilder(popup);
-  // menuBuilder.buildMenu();
-  popup.setMenu(null);
-  popup.setMenuBarVisibility(false);
-
-  // Open urls in the user's browser
-  popup.webContents.on('new-window', (event, url) => {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
-
-  // Remove this if your app does not use auto updates
-  // eslint-disable-next-line
-  //new AppUpdater();
+  popup.hide();
 };
 
 /**
@@ -186,19 +145,25 @@ ipcMain.on('fullscreen', async () => {
   }
 });
 
-ipcMain.on('login-spotify', async (event) => {
-  const reply = spotify.authUri;
-  event.reply('login-spotify', reply);
+ipcMain.on('open-popup', async () => {
+  popup?.loadURL(spotify.authUri);
+  popup?.show();
 });
 
-ipcMain.on('popup', async () => {
-  const reply = spotify.authUri;
-  if (popup === null) createPopup(reply);
+ipcMain.on('close-popup', async () => {
+  popup?.hide();
 });
 
 ipcMain.on('logged-in', async (event) => {
-  const loggedIn = false;
-  event.reply('loggin-in', loggedIn);
+  if (spotify.code === null) {
+    event.reply('loggin-in', false);
+  } else {
+    event.reply('logged-in', true);
+  }
+});
+
+ipcMain.on('set-code', async (event, code) => {
+  spotify.setCode(code);
 });
 
 app.on('window-all-closed', () => {
