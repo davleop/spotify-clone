@@ -47,9 +47,9 @@ class SpotApi {
         .authorizationCodeGrant(code)
         .then(
           (data) => {
-            console.log(`Expires in ${data.body.expires_in}`);
-            console.log(`Access token ${data.body.access_token}`);
-            console.log(`Refresh token ${data.body.refresh_token}`);
+            console.log(`Expires in ${data.body.expires_in}s`);
+            console.log(`Access token: ${data.body.access_token}`);
+            console.log(`Refresh token: ${data.body.refresh_token}`);
 
             this.spotifyApi.setAccessToken(data.body.access_token);
             this.spotifyApi.setRefreshToken(data.body.refresh_token);
@@ -63,6 +63,10 @@ class SpotApi {
       this.code = code;
       this.loggedIn = true;
     }
+  }
+
+  getAccessToken() {
+    return this.spotifyApi.getAccessToken();
   }
 
   refresh() {

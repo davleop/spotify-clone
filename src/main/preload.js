@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-const CHANNELS = ['ipc-example', 'logged-in', 'set-code'];
+const CHANNELS = ['ipc-example', 'logged-in', 'set-code', 'get-token'];
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
@@ -38,6 +38,9 @@ contextBridge.exposeInMainWorld('electron', {
     },
     reload() {
       ipcRenderer.send('reload');
-    }
+    },
+    getToken() {
+      ipcRenderer.send('get-token');
+    },
   },
 });

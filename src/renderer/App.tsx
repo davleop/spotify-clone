@@ -75,11 +75,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={isLoggedIn ? <Navigate to="/home" /> : <LetsLogin />}
-        />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={isLoggedIn ? <Home /> : <LetsLogin />} />
         <Route path="/callback" element={callback(<Navigate to="/" />)} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
