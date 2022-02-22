@@ -83,24 +83,24 @@ class SpotApi {
   /**
    * Get methods
    */
-  getAlbum(id) {
-    this.spotifyApi.getAlbum(id);
+  getAlbum(Id) {
+    this.spotifyApi.getAlbum(Id);
   }
 
-  getAlbums(ids) {
-    this.spotifyApi.getAlbums(ids);
+  getAlbums(Ids) {
+    this.spotifyApi.getAlbums(Ids);
   }
 
-  getArtist(id) {
-    this.spotifyApi.getArtist(id);
+  getArtist(Id) {
+    this.spotifyApi.getArtist(Id);
   }
 
-  getArtists(ids) {
-    this.spotifyApi.getArtists(ids);
+  getArtists(Ids) {
+    this.spotifyApi.getArtists(Ids);
   }
 
-  getArtistAlbums(id) {
-    this.spotifyApi.getArtistAlbums(id);
+  getArtistAlbums(Id) {
+    this.spotifyApi.getArtistAlbums(Id);
   }
 
   searchTracks(query) {
@@ -115,28 +115,28 @@ class SpotApi {
     this.spotifyApi.searchPlaylists(query);
   }
 
-  getAlbumTracks(id, lim, off) {
-    this.spotifyApi.getAlbumTracks(id, { limit: lim, offset: off });
+  getAlbumTracks(Id, lim, off) {
+    this.spotifyApi.getAlbumTracks(Id, { limit: lim, offset: off });
   }
 
-  getArtistTopTracks(id, suf = 'GB') {
-    this.spotifyApi.getArtistTopTracks(id, suf);
+  getArtistTopTracks(Id, suf = 'GB') {
+    this.spotifyApi.getArtistTopTracks(Id, suf);
   }
 
-  getArtistRelatedArtist(id) {
-    this.spotifyApi.getArtistRelatedArtist(id);
+  getArtistRelatedArtist(Id) {
+    this.spotifyApi.getArtistRelatedArtist(Id);
   }
 
-  getAudioFeaturesForTrack(id) {
-    this.spotifyApi.getAudioFeaturesForTrack(id);
+  getAudioFeaturesForTrack(Id) {
+    this.spotifyApi.getAudioFeaturesForTrack(Id);
   }
 
-  getAudioAnalysisForTrack(id) {
-    this.spotifyApi.getAudioAnalysisForTrack(id);
+  getAudioAnalysisForTrack(Id) {
+    this.spotifyApi.getAudioAnalysisForTrack(Id);
   }
 
-  getAudioFeaturesForTracks(ids) {
-    this.spotifyApi.getAudioFeaturesForTracks(ids);
+  getAudioFeaturesForTracks(Ids) {
+    this.spotifyApi.getAudioFeaturesForTracks(Ids);
   }
 
   /**
@@ -153,8 +153,8 @@ class SpotApi {
   /**
    * Playlist methods
    */
-  getPlaylist(id) {
-    this.spotifyApi.getPlaylist(id);
+  getPlaylist(Id) {
+    this.spotifyApi.getPlaylist(Id);
   }
 
   getUserPlaylists(username) {
@@ -164,56 +164,57 @@ class SpotApi {
   createPlaylist(title, descriptor, pub) {
     this.spotifyApi.createPlaylist(title, {
       description: descriptor,
-      public: pub,
+      // eslint-disable-next-line prettier/prettier
+      'public': pub,
     });
   }
 
-  addTracksToPlaylist(id, tracks, pos) {
-    this.spotifyApi.addTracksToPlaylist(id, tracks, { position: pos });
+  addTracksToPlaylist(Id, tracks, pos) {
+    this.spotifyApi.addTracksToPlaylist(Id, tracks, { position: pos });
   }
 
-  removeTracksFromPlaylistByPosition(id, positions, snapshotId) {
+  removeTracksFromPlaylistByPosition(Id, positions, snapshotId) {
     this.spotifyApi.removeTracksFromPlaylistByPosition(
-      id,
+      Id,
       positions,
       snapshotId
     );
   }
 
-  removeTracksFromPlaylist(id, tracks, snapId) {
-    this.spotifyApi.removeTracksFromPlaylist(id, tracks, snapId);
+  removeTracksFromPlaylist(Id, tracks, snapId) {
+    this.spotifyApi.removeTracksFromPlaylist(Id, tracks, snapId);
   }
 
-  reorderTracksInPlaylist(id, start_pos, end_pos, range) {
-    this.spotifyApi.reorderTracksInPlaylist(id, start_pos, end_pos, {
+  reorderTracksInPlaylist(Id, start_pos, end_pos, range) {
+    this.spotifyApi.reorderTracksInPlaylist(Id, start_pos, end_pos, {
       // eslint-disable-next-line prettier/prettier
       'range_length': range,
     });
   }
 
-  changePlaylistDetails(id, newName, public) {
-    this.spotifyApi.changePlaylistDetails(id, {
+  changePlaylistDetails(Id, newName, pub) {
+    this.spotifyApi.changePlaylistDetails(Id, {
       name: newName,
       // eslint-disable-next-line prettier/prettier
-      'public': public,
+      'public': pub,
     });
   }
 
-  uploadCustomPlaylistCoverImage(id, uri) {
-    this.spotifyApi.uploadCustomPlaylistCoverImage(id, uri);
+  uploadCustomPlaylistCoverImage(Id, uri) {
+    this.spotifyApi.uploadCustomPlaylistCoverImage(Id, uri);
   }
 
-  followPlaylist(id, public) {
+  followPlaylist(Id, pub) {
     // eslint-disable-next-line prettier/prettier
-    this.spotifyApi.followPlaylist(id, { 'public': public });
+    this.spotifyApi.followPlaylist(Id, { 'public': pub });
   }
 
-  unfollowPlaylist(id) {
-    this.spotifyApi.unfollowPlaylist(id);
+  unfollowPlaylist(Id) {
+    this.spotifyApi.unfollowPlaylist(Id);
   }
 
-  areFollowingPlaylist(id, usernames) {
-    this.spotifyApi.areFollowingPlaylist(id, usernames);
+  areFollowingPlaylist(Id, usernames) {
+    this.spotifyApi.areFollowingPlaylist(Id, usernames);
   }
 
   /**
