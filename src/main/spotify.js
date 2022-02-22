@@ -83,66 +83,66 @@ class SpotApi {
   /**
    * Get methods
    */
-  getAlbum(id: string) {
+  getAlbum(id) {
     this.spotifyApi.getAlbum(id);
   }
 
-  getAlbums(ids: Array<string>) {
+  getAlbums(ids) {
     this.spotifyApi.getAlbums(ids);
   }
 
-  getArtist(id: string) {
+  getArtist(id) {
     this.spotifyApi.getArtist(id);
   }
 
-  getArtists(ids: Array<string>) {
+  getArtists(ids) {
     this.spotifyApi.getArtists(ids);
   }
 
-  getArtistAlbums(id: string) {
+  getArtistAlbums(id) {
     this.spotifyApi.getArtistAlbums(id);
   }
 
-  searchTracks(query: string) {
+  searchTracks(query) {
     this.spotifyApi.searchTracks(query);
   }
 
-  searchArtists(query: string) {
+  searchArtists(query) {
     this.spotifyApi.searchArtists(query);
   }
 
-  searchPlaylists(query: string) {
+  searchPlaylists(query) {
     this.spotifyApi.searchPlaylists(query);
   }
 
-  getAlbumTracks(id: string, lim: number, off: number) {
+  getAlbumTracks(id, lim, off) {
     this.spotifyApi.getAlbumTracks(id, { limit: lim, offset: off });
   }
 
-  getArtistTopTracks(id: string, suf = 'GB') {
+  getArtistTopTracks(id, suf = 'GB') {
     this.spotifyApi.getArtistTopTracks(id, suf);
   }
 
-  getArtistRelatedArtist(id: string) {
+  getArtistRelatedArtist(id) {
     this.spotifyApi.getArtistRelatedArtist(id);
   }
 
-  getAudioFeaturesForTrack(id: string) {
+  getAudioFeaturesForTrack(id) {
     this.spotifyApi.getAudioFeaturesForTrack(id);
   }
 
-  getAudioAnalysisForTrack(id: string) {
+  getAudioAnalysisForTrack(id) {
     this.spotifyApi.getAudioAnalysisForTrack(id);
   }
 
-  getAudioFeaturesForTracks(ids: Array<string>) {
+  getAudioFeaturesForTracks(ids) {
     this.spotifyApi.getAudioFeaturesForTracks(ids);
   }
 
   /**
    * User methods
    */
-  getUser(username: string) {
+  getUser(username) {
     this.spotifyApi.getUser(username);
   }
 
@@ -153,30 +153,26 @@ class SpotApi {
   /**
    * Playlist methods
    */
-  getPlaylist(id: string) {
+  getPlaylist(id) {
     this.spotifyApi.getPlaylist(id);
   }
 
-  getUserPlaylists(username: string) {
+  getUserPlaylists(username) {
     this.spotifyApi.getUserPlaylists(username);
   }
 
-  createPlaylist(title: string, descriptor: string, pub: boolean) {
+  createPlaylist(title, descriptor, pub) {
     this.spotifyApi.createPlaylist(title, {
       description: descriptor,
       public: pub,
     });
   }
 
-  addTracksToPlaylist(id: string, tracks: Array<string>, pos: number) {
+  addTracksToPlaylist(id, tracks, pos) {
     this.spotifyApi.addTracksToPlaylist(id, tracks, { position: pos });
   }
 
-  removeTracksFromPlaylistByPosition(
-    id: string,
-    positions: Array<number>,
-    snapshotId: string
-  ) {
+  removeTracksFromPlaylistByPosition(id, positions, snapshotId) {
     this.spotifyApi.removeTracksFromPlaylistByPosition(
       id,
       positions,
@@ -184,24 +180,18 @@ class SpotApi {
     );
   }
 
-  // TODO(david): figure out type of `any` here...
-  removeTracksFromPlaylist(id: string, tracks: Array<any>, snapId: string) {
+  removeTracksFromPlaylist(id, tracks, snapId) {
     this.spotifyApi.removeTracksFromPlaylist(id, tracks, snapId);
   }
 
-  reorderTracksInPlaylist(
-    id: string,
-    start_pos: number,
-    end_pos: number,
-    range: number
-  ) {
+  reorderTracksInPlaylist(id, start_pos, end_pos, range) {
     this.spotifyApi.reorderTracksInPlaylist(id, start_pos, end_pos, {
       // eslint-disable-next-line prettier/prettier
       'range_length': range,
     });
   }
 
-  changePlaylistDetails(id: string, newName: string, public: boolean) {
+  changePlaylistDetails(id, newName, public) {
     this.spotifyApi.changePlaylistDetails(id, {
       name: newName,
       // eslint-disable-next-line prettier/prettier
@@ -209,20 +199,20 @@ class SpotApi {
     });
   }
 
-  uploadCustomPlaylistCoverImage(id: string, uri: string) {
+  uploadCustomPlaylistCoverImage(id, uri) {
     this.spotifyApi.uploadCustomPlaylistCoverImage(id, uri);
   }
 
-  followPlaylist(id: string, public: boolean) {
+  followPlaylist(id, public) {
     // eslint-disable-next-line prettier/prettier
     this.spotifyApi.followPlaylist(id, { 'public': public });
   }
 
-  unfollowPlaylist(id: string) {
+  unfollowPlaylist(id) {
     this.spotifyApi.unfollowPlaylist(id);
   }
 
-  areFollowingPlaylist(id: string, usernames: Array<string>) {
+  areFollowingPlaylist(id, usernames) {
     this.spotifyApi.areFollowingPlaylist(id, usernames);
   }
 
@@ -233,80 +223,74 @@ class SpotApi {
     this.spotifyApi.getFollowedArtists({ limit: lim });
   }
 
-  followUsers(usernames: Array<string>) {
+  followUsers(usernames) {
     this.spotifyApi.followUsers(usernames);
   }
 
-  followArtists(artists: Array<string>) {
+  followArtists(artists) {
     this.spotifyApi.followArtists(artists);
   }
 
-  unfollowUsers(usernames: Array<string>) {
+  unfollowUsers(usernames) {
     this.spotifyApi.unfollowUsers(usernames);
   }
 
-  unfollowArtists(artists: Array<string>) {
+  unfollowArtists(artists) {
     this.spotifyApi.unfollowArtists(artists);
   }
 
-  isFollowingUsers(usernames: Array<string>) {
+  isFollowingUsers(usernames) {
     this.spotifyApi.isFollowingUsers(usernames);
   }
 
-  isFollowingArtists(artists: Array<string>) {
+  isFollowingArtists(artists) {
     this.spotifyApi.isFollowingArtists(artists);
   }
 
   /**
    * Music lib methods
    */
-  getMySavedTracks(lim: number, off: number) {
+  getMySavedTracks(lim, off) {
     this.spotifyApi.getMySavedTracks({ limit: lim, offset: off });
   }
 
-  containsMySavedTracks(tracks: Array<string>) {
+  containsMySavedTracks(tracks) {
     this.spotifyApi.containsMySavedTracks(tracks);
   }
 
-  removeFromMySavedTracks(tracks: Array<string>) {
+  removeFromMySavedTracks(tracks) {
     this.spotifyApi.removeFromMySavedTracks(tracks);
   }
 
-  addToMySavedTracks(tracks: Array<string>) {
+  addToMySavedTracks(tracks) {
     this.spotifyApi.addToMySavedTracks(tracks);
   }
 
-  getMySavedAlbums(lim: number, off: number) {
+  getMySavedAlbums(lim, off) {
     this.spotifyApi.getMySavedAlbums({ limit: lim, offset: off });
   }
 
-  containsMySavedAlbums(albums: Array<string>) {
+  containsMySavedAlbums(albums) {
     this.spotifyApi.containsMySavedAlbums(albums);
   }
 
-  removeFromMySavedAlbums(albums: Array<string>) {
+  removeFromMySavedAlbums(albums) {
     this.spotifyApi.removeFromMySavedAlbums(albums);
   }
 
-  addToMySavedAlbums(albums: Array<string>) {
+  addToMySavedAlbums(albums) {
     this.spotifyApi.addToMySavedAlbums(albums);
   }
 
   /**
    * Browse methods
    */
-  getNewReleases(lim: number, off: number, cou: string) {
+  getNewReleases(lim, off, cou) {
     this.spotifyApi.getNewReleases({ limit: lim, offset: off, country: cou });
   }
 
   // time format: YYYY-MM-DDTHH:MM:SS
-  getFeaturedPlaylists(
-    lim: number,
-    off: number,
-    cou: string,
-    loc: string,
-    time: string
-  ) {
+  getFeaturedPlaylists(lim, off, cou, loc, time) {
     this.spotifyApi.getFeaturedPlaylists({
       limit: lim,
       offset: off,
@@ -316,7 +300,7 @@ class SpotApi {
     });
   }
 
-  getCategories(lim: number, off: number, cou: string, loc: string) {
+  getCategories(lim, off, cou, loc) {
     this.spotifyApi.getCategories({
       limit: lim,
       offset: off,
@@ -325,11 +309,11 @@ class SpotApi {
     });
   }
 
-  getCategory(cat: string, cou: string, loc: string) {
+  getCategory(cat, cou, loc) {
     this.spotifyApi.getCategory(cat, { coutnry: cou, locale: loc });
   }
 
-  getPlaylistForCategory(cat: string, cou: string, lim: number, off: number) {
+  getPlaylistForCategory(cat, cou, lim, off) {
     this.spotifyApi.getPlaylistForCategory(cat, {
       country: cou,
       limit: lim,
@@ -337,7 +321,7 @@ class SpotApi {
     });
   }
 
-  getRecommendations(min: number, artists: Array<string>, pop: number) {
+  getRecommendations(min, artists, pop) {
     this.spotifyApi.getRecommendations({
       min_energy: min,
       seed_artists: artists,
@@ -360,7 +344,7 @@ class SpotApi {
     this.spotifyApi.getMyCurrentPlaybackState();
   }
 
-  getMyRecentlyPlayedTracks(lim: number) {
+  getMyRecentlyPlayedTracks(lim) {
     this.spotifyApi.getMyRecentlyPlayedTracks({ limit: lim });
   }
 
@@ -372,15 +356,15 @@ class SpotApi {
     this.spotifyApi.pause();
   }
 
-  seek(positionMs: number) {
+  seek(positionMs) {
     this.spotifyApi.seek(positionMs);
   }
 
-  setRepeat(mode: string) {
+  setRepeat(mode) {
     this.spotifyApi.setRepeat(mode);
   }
 
-  setVolume(vol: number) {
+  setVolume(vol) {
     this.spotifyApi.setVolume(vol);
   }
 
@@ -396,11 +380,11 @@ class SpotApi {
     this.spotifyApi.play();
   }
 
-  setShuffle(toggle: boolean) {
+  setShuffle(toggle) {
     this.spotifyApi.setShuffle(toggle);
   }
 
-  transferMyPlayback(deviceIds: Array<string>) {
+  transferMyPlayback(deviceIds) {
     this.spotifyApi.transferMyPlayback(deviceIds);
   }
 
