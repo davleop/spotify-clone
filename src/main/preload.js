@@ -28,13 +28,16 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('open-popup');
     },
     closePopup() {
-      ipcRenderer.send('closed-popup');
+      ipcRenderer.send('close-popup');
     },
     isLoggedIn() {
       ipcRenderer.send('logged-in');
     },
-    setCode(code) {
+    setCode(event, code) {
       ipcRenderer.send('set-code', code);
     },
+    reload() {
+      ipcRenderer.send('reload');
+    }
   },
 });

@@ -39,8 +39,7 @@ class SpotApi {
   }
 
   setCode(event, code) {
-    if (!this.loggedIn) {
-      console.log(`AUTHCODE: ${code}`);
+    if (!this.loggedIn && this.code === null) {
       this.spotifyApi
         .authorizationCodeGrant(code)
         .then(
@@ -61,6 +60,21 @@ class SpotApi {
       this.code = code;
       this.loggedIn = true;
     }
+  }
+
+  refresh() {
+    this.spotifyApi
+      .refreshAccessToken()
+      .then(
+        (data) => {
+          this.spotifyApi.setAccessToken(data.body.access_token);
+          this.spotifyApi.setRefreshToken(data.body.refresh_token);
+        },
+        (err) => {
+          console.log('Something went wrong!', err);
+        }
+      )
+      .catch(console.log);
   }
 }
 

@@ -154,13 +154,15 @@ ipcMain.on('close-popup', async () => {
 });
 
 ipcMain.on('logged-in', async (event) => {
-  console.log(spotify.loggedIn);
-  event.reply(spotify.loggedIn);
+  event.reply('logged-in', spotify.loggedIn);
 });
 
 ipcMain.on('set-code', async (event, code) => {
-  console.log(code);
-  spotify.setCode(event, code);
+  if (!spotify.loggedIn) spotify.setCode(event, code);
+});
+
+ipcMain.on('reload', async () => {
+  mainWindow?.reload();
 });
 
 app.on('window-all-closed', () => {

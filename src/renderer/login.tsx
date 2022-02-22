@@ -18,14 +18,13 @@ class Login extends Component {
       <div className="box-holder">
         <div className="overlay" />
         <div className="login-form">
-          <a
-            href="/home"
-            role="button"
+          <button
+            type="button"
             className="butt go-spotify"
             onClick={this.handleLogin}
           >
             Login
-          </a>
+          </button>
         </div>
       </div>
     );

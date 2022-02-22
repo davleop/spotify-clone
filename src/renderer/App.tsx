@@ -47,16 +47,13 @@ const LetsLogin = () => {
   );
 };
 
-const callback = (setter: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; }, comp: JSX.Element) => {
-  window.electron.ipcRenderer.closePopup();
+const callback = (comp) => {
   const code = new URL(window.location.href).searchParams.get('code');
-
   if (code !== null) {
-    console.log(`FROM THE OUTSIDE ${code}`);
+    window.electron.ipcRenderer.closePopup();
     window.electron.ipcRenderer.setCode('set-code', code);
-    setter(true);
+    window.electron.ipcRenderer.reload();
   }
-
   return comp;
 };
 
@@ -68,8 +65,12 @@ export default function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    //
-  });
+    window.electron.ipcRenderer.once('logged-in', (arg) => {
+      console.log(`LOGGED INTERNAL? ${arg}`);
+      if (arg === true) setLoggedIn(arg);
+    });
+    window.electron.ipcRenderer.isLoggedIn();
+  }, [isLoggedIn]);
 
   return (
     <Router>
@@ -79,11 +80,8 @@ export default function App() {
           element={isLoggedIn ? <Navigate to="/home" /> : <LetsLogin />}
         />
         <Route path="/home" element={<Home />} />
-        <Route
-          path="/callback"
-          element={callback(setLoggedIn, <Navigate to="/" />)}
-        />
-        <Route path="/*" element={<NoMatch />} />
+        <Route path="/callback" element={callback(<Navigate to="/" />)} />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
     </Router>
   );
