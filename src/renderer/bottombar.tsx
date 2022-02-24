@@ -7,6 +7,7 @@ class BottomBar extends Component {
     super(props);
     this.state = {
       token: null,
+      player: null,
       value: 0,
       repeat: 0,
       volume: 100,
@@ -34,11 +35,16 @@ class BottomBar extends Component {
     this.handleShuffle = this.handleShuffle.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleFullScreen = this.handleFullScreen.bind(this);
+    this.handleNewPlayer = this.handleNewPlayer.bind(this);
 
     window.electron.ipcRenderer.once('get-token', (arg) => {
       if (this.state.token === null) this.setState({ token: arg });
     });
     window.electron.ipcRenderer.getToken();
+  }
+
+  handleNewPlayer(val) {
+    this.setState({ player: val });
   }
 
   handlePlayPause(event) {
@@ -162,7 +168,6 @@ class BottomBar extends Component {
     } d-flex justify-content-center align-items-center fullscreen`;
     return (
       <div id="botbar">
-        <SpotSDK />
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-2" />

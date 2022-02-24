@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://sdk.scdn.co/spotify-player.js 'unsafe-inline'"
+      content="script-src 'self' 'unsafe-inline'"
     />
     <title>Spotify-Clone</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -12,11 +12,50 @@
   <body>
     <div id="root"></div>
   </body>
+  <script src="" />
   <script>
     window.electron.ipcRenderer.once('ipc-example', (arg) => {
       console.log(arg);
     });
-
     window.electron.ipcRenderer.myPing();
+
+    let token;
+    let player;
+
+    window.electron.ipcRenderer.once('get-token', (arg) => {
+      token = arg;
+    });
+
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); },
+        volume: 1.0,
+      });
+
+      // Ready
+      player.addListener('ready', ({ device_id }) => {
+          console.log('Ready with Device ID', device_id);
+      });
+
+      // Not Ready
+      player.addListener('not_ready', ({ device_id }) => {
+          console.log('Device ID has gone offline', device_id);
+      });
+
+      player.addListener('initialization_error', ({ message }) => {
+          console.error(message);
+      });
+
+      player.addListener('authentication_error', ({ message }) => {
+          console.error(message);
+      });
+
+      player.addListener('account_error', ({ message }) => {
+          console.error(message);
+      });
+
+      player.connect();
+    }
   </script>
 </html>
