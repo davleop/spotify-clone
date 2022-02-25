@@ -6,8 +6,6 @@ class BottomBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null,
-      player: null,
       value: 0,
       repeat: 0,
       volume: 100,
@@ -35,25 +33,17 @@ class BottomBar extends Component {
     this.handleShuffle = this.handleShuffle.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleFullScreen = this.handleFullScreen.bind(this);
-    this.handleNewPlayer = this.handleNewPlayer.bind(this);
-
-    window.electron.ipcRenderer.once('get-token', (arg) => {
-      if (this.state.token === null) this.setState({ token: arg });
-    });
-    window.electron.ipcRenderer.getToken();
   }
 
-  handleNewPlayer(val) {
-    this.setState({ player: val });
-  }
-
-  handlePlayPause(event) {
-    if (this.state.play) {
+  handlePlayPause() {
+    if (this.props.isPaused) {
       console.log('paused');
-      this.setState({ play: !this.state.play });
+      this.props.player.togglePlay();
+      // this.setState({ play: !this.state.play });
     } else {
       console.log('playing');
-      this.setState({ play: !this.state.play });
+      this.props.player.togglePlay();
+      // this.setState({ play: !this.state.play });
     }
   }
 
