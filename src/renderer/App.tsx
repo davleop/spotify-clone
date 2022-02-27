@@ -48,13 +48,12 @@ const Home = () => {
     };
   }, [isMenuOpen]);
 
+  const script = document.createElement('script');
+  script.src = 'https://sdk.scdn.co/spotify-player.js';
+  script.async = true;
+  document.body.appendChild(script);
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://sdk.scdn.co/spotify-player.js';
-    script.async = true;
-
-    document.body.appendChild(script);
-
     window.onSpotifyWebPlaybackSDKReady = () => {
       const play = new window.Spotify.Player({
         name: 'Web Playback SDK',
@@ -93,17 +92,17 @@ const Home = () => {
           setTrack(state.track_window.current_track);
           setPaused(state.paused);
 
-          player
+          play
             .getCurrentState()
-            .then((state) => {
-              !state ? setActive(false) : setActive(true);
+            .then((st: unknown) => {
+              !st ? setActive(false) : setActive(true);
             })
             .catch(console.log);
         }
       );
       play.connect();
     };
-  }, [player, token]);
+  });
 
   return (
     <div className="">
@@ -146,10 +145,13 @@ export default function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    window.electron.ipcRenderer.once('logged-in', (arg: boolean | ((prevState: boolean) => boolean)) => {
-      console.log(`LOGGED INTERNAL? ${arg}`);
-      if (arg === true) setLoggedIn(arg);
-    });
+    window.electron.ipcRenderer.once(
+      'logged-in',
+      (arg: boolean | ((prevState: boolean) => boolean)) => {
+        console.log(`LOGGED INTERNAL? ${arg}`);
+        if (arg === true) setLoggedIn(arg);
+      }
+    );
     window.electron.ipcRenderer.isLoggedIn();
   }, [isLoggedIn]);
 

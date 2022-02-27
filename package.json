@@ -112,7 +112,7 @@
     "reload"
   ],
   "jest": {
-    "testURL": "http://localhost/",
+    "testURL": "https://localhost/",
     "testEnvironment": "jsdom",
     "transform": {
       "\\.(ts|tsx|js|jsx)$": "ts-jest"
