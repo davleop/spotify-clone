@@ -1,5 +1,8 @@
 # README.md
 
+Scrapping project for now because SpotifySDK doesn't work in current environment ��
+
+
 `npm i`
 `npm start`
 
