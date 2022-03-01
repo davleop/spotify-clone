@@ -1,6 +1,7 @@
 /* eslint global-require: off, no-console: off, promise/always-return: off */
 
 const SpotifyWebApi = require('spotify-web-api-node');
+const { SpotifyPlaybackSDK } = require('spotify-playback-sdk-node');
 const credentials = require('../../env-vars.json');
 
 const scopes = [
@@ -36,6 +37,10 @@ class SpotApi {
     this.authUri = this.spotifyApi.createAuthorizeURL(scopes);
     this.code = null;
     this.loggedIn = false;
+    this.spotify = null;
+    this.player = null;
+    this.stream = null;
+    this.connected = null;
   }
 
   /**
@@ -62,7 +67,29 @@ class SpotApi {
 
       this.code = code;
       this.loggedIn = true;
+
+      // setup up Playback SDK
+      this.setupPlaybackSDK(this.getAccessToken());
     }
+  }
+
+  async setupPlaybackSDK(token) {
+    this.spotify = new SpotifyPlaybackSDK();
+    await this.spotify.init();
+
+    this.player = await this.spotify.createPlayer({
+      name: 'Playback SDK',
+      volume: 1.0,
+      getOAuthToken() {
+        return token;
+      },
+    });
+
+    this.player.on('player_state_changed', console.log);
+
+    this.stream = await this.player.getAudio();
+    this.connected = await this.player.connect();
+    if (!this.connected) throw new Error('unable to connect');
   }
 
   getAccessToken() {

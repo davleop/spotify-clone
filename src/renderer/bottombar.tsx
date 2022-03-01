@@ -36,14 +36,12 @@ class BottomBar extends Component {
   }
 
   handlePlayPause() {
-    if (this.props.isPaused) {
+    if (this.state.play) {
       console.log('paused');
-      this.props.player.togglePlay();
-      // this.setState({ play: !this.state.play });
+      this.setState({ play: !this.state.play });
     } else {
       console.log('playing');
-      this.props.player.togglePlay();
-      // this.setState({ play: !this.state.play });
+      this.setState({ play: !this.state.play });
     }
   }
 

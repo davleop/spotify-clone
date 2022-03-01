@@ -11,28 +11,9 @@ import MainNavBar from './navbar';
 import BottomBar from './bottombar';
 import Login from './login';
 
-const track = {
-  name: '',
-  album: {
-    images: [{ url: '' }],
-  },
-  artists: [{ name: '' }],
-};
-
 const Home = () => {
   const ref = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [player, setPlayer] = useState(undefined);
-  const [isPaused, setPaused] = useState(false);
-  const [isActive, setActive] = useState(false);
-  const [currentTrack, setTrack] = useState(track);
-
-  // get that token...
-  const [token, setToken] = useState(null);
-  window.electron.ipcRenderer.once('get-token', (arg: SetStateAction<null>) => {
-    if (token === null) setToken(arg);
-  });
-  window.electron.ipcRenderer.getToken();
 
   useEffect(() => {
     const checkIfClickedOutside = (e: { target: any; }) => {
@@ -48,71 +29,10 @@ const Home = () => {
     };
   }, [isMenuOpen]);
 
-  const script = document.createElement('script');
-  script.src = 'https://sdk.scdn.co/spotify-player.js';
-  script.async = true;
-  document.body.appendChild(script);
-
-  useEffect(() => {
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const play = new window.Spotify.Player({
-        name: 'Web Playback SDK',
-        getOAuthToken: (cb: (arg0: null) => void) => {
-          cb(token);
-        },
-        volume: 1.0,
-      });
-
-      setPlayer(play);
-
-      play.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-      });
-
-      play.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-      });
-
-      play?.addListener(
-        'player_state_changed',
-        (state: {
-          track_window: {
-            current_track: SetStateAction<{
-              name: string;
-              album: { images: { url: string }[] };
-              artists: { name: string }[];
-            }>;
-          };
-          paused: boolean | ((prevState: boolean) => boolean);
-        }) => {
-          if (!state) {
-            return;
-          }
-
-          setTrack(state.track_window.current_track);
-          setPaused(state.paused);
-
-          play
-            .getCurrentState()
-            .then((st: unknown) => {
-              !st ? setActive(false) : setActive(true);
-            })
-            .catch(console.log);
-        }
-      );
-      play.connect();
-    };
-  });
-
   return (
     <div className="">
       <MainNavBar re={ref} open={isMenuOpen} setOpen={setIsMenuOpen} />
-      <BottomBar
-        player={player}
-        isPaused={isPaused}
-        isActive={isActive}
-        currentTrack={currentTrack}
-      />
+      <BottomBar />
     </div>
   );
 };
