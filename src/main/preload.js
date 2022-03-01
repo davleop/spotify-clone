@@ -42,5 +42,8 @@ contextBridge.exposeInMainWorld('electron', {
     getToken() {
       ipcRenderer.send('get-token');
     },
+    togglePlay() {
+      ipcRenderer.send('toggle-play');
+    },
   },
 });

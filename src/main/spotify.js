@@ -90,6 +90,7 @@ class SpotApi {
     this.stream = await this.player.getAudio();
     this.connected = await this.player.connect();
     if (!this.connected) throw new Error('unable to connect');
+    else console.log('connected to Spotify SDK');
   }
 
   getAccessToken() {

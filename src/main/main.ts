@@ -169,6 +169,11 @@ ipcMain.on('get-token', async (event) => {
   event.reply('get-token', spotify.getAccessToken());
 });
 
+ipcMain.on('toggle-play', async () => {
+  console.log('toggling Play/Pause');
+  await spotify.player?.togglePlay();
+});
+
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed

@@ -43,6 +43,7 @@ class BottomBar extends Component {
       console.log('playing');
       this.setState({ play: !this.state.play });
     }
+    window.electron.ipcRenderer.togglePlay();
   }
 
   handleForward(event) {
