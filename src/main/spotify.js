@@ -69,7 +69,7 @@ class SpotApi {
       this.loggedIn = true;
 
       // setup up Playback SDK
-      this.setupPlaybackSDK(this.getAccessToken());
+      this.setupPlaybackSDK(this.getAccessToken()).catch(console.log);
     }
   }
 
